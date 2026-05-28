@@ -6,30 +6,18 @@ from rest_framework import serializers
 
 from .models import AuditLog, NormalizedRecord, Organization, RawRecord, Source
 
-
-# ──────────────────────────────────────────────
-# Organization
-# ──────────────────────────────────────────────
 class OrganizationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organization
         fields = ["id", "name", "created_at"]
         read_only_fields = ["id", "created_at"]
 
-
-# ──────────────────────────────────────────────
-# Source
-# ──────────────────────────────────────────────
 class SourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Source
         fields = ["id", "source_type"]
         read_only_fields = ["id"]
 
-
-# ──────────────────────────────────────────────
-# RawRecord
-# ──────────────────────────────────────────────
 class RawRecordSerializer(serializers.ModelSerializer):
     organization_name = serializers.CharField(
         source="organization.name", read_only=True
@@ -51,10 +39,6 @@ class RawRecordSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ["id", "uploaded_at"]
 
-
-# ──────────────────────────────────────────────
-# NormalizedRecord
-# ──────────────────────────────────────────────
 class NormalizedRecordSerializer(serializers.ModelSerializer):
     organization_name = serializers.CharField(
         source="organization.name", read_only=True
@@ -81,9 +65,6 @@ class NormalizedRecordSerializer(serializers.ModelSerializer):
         read_only_fields = ["id", "created_at"]
 
 
-# ──────────────────────────────────────────────
-# AuditLog
-# ──────────────────────────────────────────────
 class AuditLogSerializer(serializers.ModelSerializer):
     class Meta:
         model = AuditLog
@@ -99,9 +80,6 @@ class AuditLogSerializer(serializers.ModelSerializer):
         read_only_fields = ["id", "timestamp"]
 
 
-# ──────────────────────────────────────────────
-# File Upload (non-model serializer)
-# ──────────────────────────────────────────────
 class FileUploadSerializer(serializers.Serializer):
     """Validates the CSV file upload request."""
 

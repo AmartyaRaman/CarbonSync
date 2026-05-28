@@ -11,12 +11,16 @@ from . import views
 app_name = "emissions"
 
 urlpatterns = [
-    # ── Upload APIs ──
+    # Authentication APIs
+    path("auth/login/", views.CustomObtainAuthToken.as_view(), name="auth-login"),
+    path("auth/me/", views.UserProfileView.as_view(), name="auth-me"),
+
+    # Upload APIs
     path("upload/sap/", views.UploadSAPView.as_view(), name="upload-sap"),
     path("upload/utility/", views.UploadUtilityView.as_view(), name="upload-utility"),
     path("upload/travel/", views.UploadTravelView.as_view(), name="upload-travel"),
     
-    # ── Dashboard APIs ──
+    # Dashboard APIs
     path("records/", views.RecordListView.as_view(), name="record-list"),
     path(
         "records/suspicious/",

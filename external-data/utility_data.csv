@@ -1,0 +1,16 @@
+meter_id,facility,billing_start,billing_end,consumption,unit,tariff_type
+MTR001,Delhi Plant,2026-04-01,2026-04-30,5200.0,kWh,Industrial
+MTR002,Mumbai Office,2026-04-15,2026-05-14,4.5,MWh,Commercial
+MTR003,Noida Warehouse,2026-05-01,2026-05-31,3100.0,kWh,Industrial
+MTR004,Delhi Plant,2026-05-01,2026-05-31,15000.0,kWh,Industrial
+MTR005,Pune Office,2026-05-01,2026-05-31,2500.0,kWh,Commercial
+MTR006,Chennai Plant,2026-05-01,2026-05-31,7.2,MWh,Industrial
+MTR007,Kolkata Office,2026-05-01,2026-05-31,1800.0,kWh,Commercial
+MTR008,Bangalore Hub,2026-05-01,2026-05-31,4200.0,kWh,Industrial
+MTR009,Lucknow Warehouse,2026-05-01,2026-05-31,3300.0,kWh,Industrial
+MTR010,Hyderabad Office,2026-05-01,2026-05-31,2.8,MWh,Commercial
+MTR011,Jaipur Plant,2026-05-01,2026-05-31,9100.0,kWh,Industrial
+MTR012,Patna Office,2026-05-01,2026-05-31,1200.0,kWh,Commercial
+MTR013,Ahmedabad Hub,2026-05-01,2026-05-31,5400.0,kWh,Industrial
+MTR014,Delhi Plant,2026-06-01,2026-06-30,6200.0,kWh,Industrial
+MTR015,Noida Warehouse,2026-06-01,2026-06-30,3500.0,kWh,Industrial

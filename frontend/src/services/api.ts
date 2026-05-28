@@ -9,6 +9,51 @@ const apiClient = axios.create({
   },
 });
 
+// Interceptor to attach the authentication token
+apiClient.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Token ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Interceptor to handle 401 Unauthorized errors
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      // If we are not on the login page or root, redirect/reload to prompt login
+      if (!window.location.pathname.includes('/login')) {
+        window.location.reload();
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
+export interface UserProfile {
+  user_id: number;
+  username: string;
+  email: string;
+  role: 'Admin' | 'Analyst' | 'Viewer';
+}
+
+export interface LoginResponse {
+  token: string;
+  user_id: number;
+  username: string;
+  email: string;
+  role: 'Admin' | 'Analyst' | 'Viewer';
+}
+
 export interface NormalizedRecord {
   id: number;
   organization: number;
@@ -92,5 +137,16 @@ export const api = {
   getAuditLog: async (recordId: number): Promise<AuditLog[]> => {
     const response = await apiClient.get<AuditLog[]>(`audit/${recordId}/`);
     return Array.isArray(response.data) ? response.data : (response.data as any).results || [];
+  },
+
+  // Authentication
+  login: async (username: string, password: string): Promise<LoginResponse> => {
+    const response = await apiClient.post<LoginResponse>('auth/login/', { username, password });
+    return response.data;
+  },
+
+  getCurrentUser: async (): Promise<UserProfile> => {
+    const response = await apiClient.get<UserProfile>('auth/me/');
+    return response.data;
   },
 };

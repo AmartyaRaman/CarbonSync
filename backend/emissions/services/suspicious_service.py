@@ -35,10 +35,7 @@ def check_suspicious(source_type: str, record: dict[str, Any]) -> list[str]:
 
     return warnings
 
-
-# ──────────────────────────────────────────────
 # SAP heuristics
-# ──────────────────────────────────────────────
 def _check_sap_suspicious(record: dict[str, Any]) -> list[str]:
     """
     SAP heuristic checks:
@@ -59,9 +56,7 @@ def _check_sap_suspicious(record: dict[str, Any]) -> list[str]:
     return warnings
 
 
-# ──────────────────────────────────────────────
 # Utility heuristics
-# ──────────────────────────────────────────────
 def _check_utility_suspicious(record: dict[str, Any]) -> list[str]:
     """
     Utility heuristic checks:
@@ -82,9 +77,7 @@ def _check_utility_suspicious(record: dict[str, Any]) -> list[str]:
     return warnings
 
 
-# ──────────────────────────────────────────────
 # Travel heuristics
-# ──────────────────────────────────────────────
 def _check_travel_suspicious(record: dict[str, Any]) -> list[str]:
     """
     Travel heuristic checks:

@@ -1,13 +1,31 @@
 import React, { useState } from 'react';
-import { FileDown, RefreshCw, Layers } from 'lucide-react';
+import { FileDown, RefreshCw, Layers, ShieldAlert } from 'lucide-react';
 import UploadCard from '../components/UploadCard';
+import { useAuth } from '../context/AuthContext';
 
 export const Upload: React.FC = () => {
   const [lastUploadedSummary, setLastUploadedSummary] = useState<any | null>(null);
+  const { isAdminOrAnalyst } = useAuth();
 
   const handleUploadSuccess = (summary: any) => {
     setLastUploadedSummary(summary);
   };
+
+  if (!isAdminOrAnalyst) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20 text-center space-y-4">
+        <div className="p-4 bg-amber-500/10 border border-amber-500/20 text-amber-600 rounded-2xl">
+          <ShieldAlert className="w-12 h-12" />
+        </div>
+        <div className="max-w-md space-y-2">
+          <h2 className="text-xl font-extrabold text-slate-950 tracking-tight">Access Restricted</h2>
+          <p className="text-sm font-semibold text-slate-500 leading-relaxed">
+            Only users with the <strong>Admin</strong> or <strong>Analyst</strong> role have permissions to ingest raw CSV data.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8">

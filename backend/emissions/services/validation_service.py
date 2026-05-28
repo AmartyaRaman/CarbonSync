@@ -36,9 +36,7 @@ def validate_record(source_type: str, record: dict[str, Any]) -> str:
     return validator(record)
 
 
-# ──────────────────────────────────────────────
 # SAP validation
-# ──────────────────────────────────────────────
 def _validate_sap(record: dict[str, Any]) -> str:
     """
     SAP rule: quantity <= 0 → Failed.
@@ -49,9 +47,7 @@ def _validate_sap(record: dict[str, Any]) -> str:
     return "Approved"
 
 
-# ──────────────────────────────────────────────
 # Utility validation
-# ──────────────────────────────────────────────
 def _validate_utility(record: dict[str, Any]) -> str:
     """
     Utility rule: consumption > 10,000 kWh → Suspicious.
@@ -62,9 +58,7 @@ def _validate_utility(record: dict[str, Any]) -> str:
     return "Approved"
 
 
-# ──────────────────────────────────────────────
 # Travel validation
-# ──────────────────────────────────────────────
 def _validate_travel(record: dict[str, Any]) -> str:
     """
     Travel rule: origin == destination → Suspicious.

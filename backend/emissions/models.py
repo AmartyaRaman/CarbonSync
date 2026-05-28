@@ -7,10 +7,6 @@ Organization, Source, RawRecord, NormalizedRecord, AuditLog.
 
 from django.db import models
 
-
-# ──────────────────────────────────────────────
-# Organization
-# ──────────────────────────────────────────────
 class Organization(models.Model):
     """Company / tenant entity."""
 
@@ -23,10 +19,6 @@ class Organization(models.Model):
     def __str__(self) -> str:
         return self.name
 
-
-# ──────────────────────────────────────────────
-# Source
-# ──────────────────────────────────────────────
 class Source(models.Model):
     """Data source type (SAP, Utility, Travel)."""
 
@@ -45,9 +37,6 @@ class Source(models.Model):
         return self.source_type
 
 
-# ──────────────────────────────────────────────
-# RawRecord
-# ──────────────────────────────────────────────
 class RawRecord(models.Model):
     """Stores the original uploaded CSV row as JSON."""
 
@@ -73,9 +62,6 @@ class RawRecord(models.Model):
         return f"RawRecord #{self.pk} ({self.source})"
 
 
-# ──────────────────────────────────────────────
-# NormalizedRecord
-# ──────────────────────────────────────────────
 class NormalizedRecord(models.Model):
     """Cleaned, validated emission record."""
 
@@ -120,9 +106,6 @@ class NormalizedRecord(models.Model):
         return f"{self.category} — {self.quantity} {self.unit} ({self.status})"
 
 
-# ──────────────────────────────────────────────
-# AuditLog
-# ──────────────────────────────────────────────
 class AuditLog(models.Model):
     """Tracks all modifications to normalized records."""
 

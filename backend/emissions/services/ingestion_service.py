@@ -26,10 +26,7 @@ from emissions.normalization import (
 from emissions.services.suspicious_service import check_suspicious
 from emissions.services.validation_service import validate_record
 
-
-# ──────────────────────────────────────────────
 # Parser dispatch
-# ──────────────────────────────────────────────
 NORMALIZERS = {
     "SAP": normalize_sap,
     "Utility": normalize_utility,
@@ -53,23 +50,24 @@ def ingest_csv(
     Returns:
         Summary dict with counts of created records by status.
     """
-    # ── 1. Resolve / create org and source ──
+
     organization, _ = Organization.objects.get_or_create(name=organization_name)
     source, _ = Source.objects.get_or_create(source_type=source_type)
 
-    # ── 2. Parse CSV into DataFrame ──
+    # Parse csv file into DataFrame
     if isinstance(file_content, bytes):
         file_content = file_content.decode("utf-8")
     df = pd.read_csv(io.StringIO(file_content))
 
-    # ── 3. Normalize ──
+    # Normalize
+    normalizer = NORMALIZERS.get(source_type)
     normalizer = NORMALIZERS.get(source_type)
     if normalizer is None:
         raise ValueError(f"Unknown source type: {source_type}")
 
     normalized_rows = normalizer(df)
 
-    # ── 4. Validate, detect suspicious, and persist ──
+    # Validate, detect suspicious, and persist
     summary: dict[str, int] = {
         "total": 0,
         "approved": 0,

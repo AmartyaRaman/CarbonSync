@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Check, AlertTriangle, XOctagon, Eye, Filter } from 'lucide-react';
 import { type NormalizedRecord } from '../services/api';
+import { useAuth } from '../context/AuthContext';
 
 interface ReviewTableProps {
   records: NormalizedRecord[];
@@ -17,6 +18,7 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
   onFlag,
   onViewAudit,
 }) => {
+  const { isAdminOrAnalyst } = useAuth();
   const [selectedRecordId, setSelectedRecordId] = useState<number | null>(null);
   const [flagReason, setFlagReason] = useState<string>('');
   const [flagLoading, setFlagLoading] = useState<number | null>(null);
@@ -149,7 +151,7 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
                         <Eye className="w-4 h-4" />
                       </button>
 
-                      {record.status !== 'Approved' && record.status !== 'Failed' && (
+                      {isAdminOrAnalyst && record.status !== 'Approved' && record.status !== 'Failed' && (
                         <button
                           onClick={() => handleApprove(record.id)}
                           disabled={approveLoading === record.id}
@@ -159,7 +161,7 @@ export const ReviewTable: React.FC<ReviewTableProps> = ({
                         </button>
                       )}
 
-                      {record.status !== 'Suspicious' && (
+                      {isAdminOrAnalyst && record.status !== 'Suspicious' && (
                         <button
                           onClick={() => setSelectedRecordId(selectedRecordId === record.id ? null : record.id)}
                           className="inline-flex items-center px-2.5 py-1.5 border border-amber-200 bg-amber-50 hover:bg-amber-100 text-amber-800 rounded-lg text-xs font-bold transition-all shadow-2xs"

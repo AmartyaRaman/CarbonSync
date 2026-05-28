@@ -1,0 +1,16 @@
+trip_id,employee_id,travel_type,origin,destination,trip_date
+TR001,EMP101,Flight,DEL,BLR,2026-05-15
+TR002,EMP102,Hotel,Mumbai,Mumbai,2026-05-18
+TR003,EMP103,GroundTransport,Delhi,Gurgaon,2026-05-20
+TR004,EMP104,Flight,BOM,CCU,2026-05-21
+TR005,EMP105,Flight,DEL,DXB,2026-05-23
+TR006,EMP106,Flight,BLR,HYD,2026-05-24
+TR007,EMP107,GroundTransport,Noida,Delhi,2026-05-24
+TR008,EMP108,Hotel,Bengaluru,Bengaluru,2026-05-25
+TR009,EMP109,Flight,CCU,DEL,2026-05-25
+TR010,EMP110,Flight,MAA,BOM,2026-05-26
+TR011,EMP111,GroundTransport,Mumbai,Pune,2026-05-26
+TR012,EMP112,Flight,DEL,DEL,2026-05-27
+TR013,EMP113,Hotel,Dubai,Dubai,2026-05-27
+TR014,EMP114,Flight,DXB,DEL,2026-05-28
+TR015,EMP115,GroundTransport,Gurgaon,Noida,2026-05-28

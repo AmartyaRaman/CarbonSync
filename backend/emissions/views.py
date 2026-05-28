@@ -8,11 +8,15 @@ Implements all REST endpoints defined in the architecture:
 """
 
 from rest_framework import generics, status
+from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.parsers import FormParser, MultiPartParser
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .models import AuditLog, NormalizedRecord
+from .permissions import IsAdminOrAnalyst
 from .serializers import (
     AuditLogSerializer,
     FileUploadSerializer,
@@ -21,9 +25,68 @@ from .serializers import (
 from .services.ingestion_service import ingest_csv
 
 
-# ══════════════════════════════════════════════
+# Authentication APIs
+class CustomObtainAuthToken(ObtainAuthToken):
+    """
+    POST /api/auth/login
+
+    Returns token + user profile info including role (group membership).
+    """
+    permission_classes = [AllowAny]
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(
+            data=request.data, context={"request": request}
+        )
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data["user"]
+        token, _ = Token.objects.get_or_create(user=user)
+
+        # Determine role from group membership
+        groups = list(user.groups.values_list("name", flat=True))
+        if "Admin" in groups:
+            role = "Admin"
+        elif "Analyst" in groups:
+            role = "Analyst"
+        else:
+            role = "Viewer"
+
+        return Response({
+            "token": token.key,
+            "user_id": user.pk,
+            "username": user.username,
+            "email": user.email,
+            "role": role,
+        })
+
+
+class UserProfileView(APIView):
+    """
+    GET /api/auth/me
+
+    Return the currently authenticated user's profile.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        groups = list(user.groups.values_list("name", flat=True))
+        if "Admin" in groups:
+            role = "Admin"
+        elif "Analyst" in groups:
+            role = "Analyst"
+        else:
+            role = "Viewer"
+
+        return Response({
+            "user_id": user.pk,
+            "username": user.username,
+            "email": user.email,
+            "role": role,
+        })
+
+
 # Upload APIs
-# ══════════════════════════════════════════════
 class BaseUploadView(APIView):
     """
     Base class for CSV upload endpoints.
@@ -145,6 +208,7 @@ class ApproveRecordView(APIView):
 
     Approve a record (change status to Approved) and log the action.
     """
+    permission_classes = [IsAdminOrAnalyst]
 
     def patch(self, request, pk):
         try:
@@ -185,6 +249,7 @@ class FlagSuspiciousRecordView(APIView):
 
     Flag a record (including approved ones) as suspicious, with an optional reason.
     """
+    permission_classes = [IsAdminOrAnalyst]
 
     def patch(self, request, pk):
         try:

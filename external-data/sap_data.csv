@@ -1,0 +1,16 @@
+record_id,material_id,material_name,plant_code,quantity,unit,posting_date,vendor,cost_center
+1,MAT001,Diesel Fuel,PL001,1000,L,2026-05-26,ABC Fuels,CC101
+2,MAT002,Diesel Fuel,PL001,500,LTR,26/05/2026,XYZ Energy,CC101
+3,MAT003,Petrol,DE102,800,Liters,2026/05/24,Fuel India,CC102
+4,MAT004,Coal,PL005,2,Ton,24-05-2026,Energy Corp,CC103
+5,MAT005,Cement,DE201,50,KG,2026-05-22,Build Materials Ltd,CC104
+6,MAT006,Steel Rods,PL002,1000,kg,22/05/2026,MetalWorks,CC105
+7,MAT007,Diesel Fuel,PL001,1200,L,2026/05/27,ABC Fuels,CC101
+8,MAT008,Petrol,PL003,300,LTR,2026-05-20,Fuel India,CC102
+9,MAT009,Natural Gas,PL008,600,m3,2026-05-19,Gas Supply Co,CC106
+10,MAT010,Lubricant Oil,PL004,250,L,2026-05-18,LubriTech,CC107
+11,MAT011,Copper Wire,DE111,700,KG,17/05/2026,MetalWorks,CC108
+12,MAT012,Diesel Fuel,PL006,1500,Liters,2026-05-17,ABC Fuels,CC101
+13,MAT013,Coal,PL005,3,Ton,2026/05/16,Energy Corp,CC103
+14,MAT014,Petrol,PL007,900,L,15-05-2026,Fuel India,CC102
+15,MAT015,Steel Sheets,DE222,1200,kg,2026-05-14,MetalWorks,CC109
