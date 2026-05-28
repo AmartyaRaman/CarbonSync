@@ -79,6 +79,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+import shutil
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -86,9 +88,23 @@ DATABASES = {
     }
 }
 
+if os.environ.get('VERCEL') == '1':
+    db_path = '/tmp/db.sqlite3'
+    original_db = BASE_DIR / 'db.sqlite3'
+    if not os.path.exists(db_path) and os.path.exists(original_db):
+        try:
+            shutil.copyfile(original_db, db_path)
+        except Exception:
+            pass
+    # Force write permissions on /tmp/db.sqlite3, even if already created in a previous container run
+    if os.path.exists(db_path):
+        try:
+            import stat
+            os.chmod(db_path, stat.S_IWRITE | stat.S_IREAD)
+        except Exception:
+            pass
+    DATABASES['default']['NAME'] = db_path
 
-# Password validation
-# https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
