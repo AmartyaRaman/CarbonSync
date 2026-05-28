@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Check, AlertTriangle, XOctagon, Eye, Filter } from 'lucide-react';
+import { Check, AlertTriangle, XOctagon, Eye } from 'lucide-react';
 import { type NormalizedRecord } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 

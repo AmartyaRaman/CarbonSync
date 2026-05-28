@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Filter, Search, RotateCcw, AlertTriangle, Eye, ShieldAlert, Sparkles, ChevronDown } from 'lucide-react';
+import {  Search, RotateCcw, ChevronDown } from 'lucide-react';
 import { useRecords } from '../hooks/useRecords';
 import ReviewTable from '../components/ReviewTable';
 import AuditTimeline from '../components/AuditTimeline';
 
 export const Review: React.FC = () => {
-  const { records, loading, approve, flag, filters, setFilters, refetch } = useRecords();
+  const { records, loading, approve, flag, filters, setFilters} = useRecords();
   const [selectedRecordId, setSelectedRecordId] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
 

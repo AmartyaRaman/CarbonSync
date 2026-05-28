@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
-import { FileDown, RefreshCw, Layers, ShieldAlert } from 'lucide-react';
+import React from 'react';
+import { Layers, ShieldAlert } from 'lucide-react';
 import UploadCard from '../components/UploadCard';
 import { useAuth } from '../context/AuthContext';
 
 export const Upload: React.FC = () => {
-  const [lastUploadedSummary, setLastUploadedSummary] = useState<any | null>(null);
   const { isAdminOrAnalyst } = useAuth();
 
-  const handleUploadSuccess = (summary: any) => {
-    setLastUploadedSummary(summary);
-  };
+  const handleUploadSuccess = () => { }
 
   if (!isAdminOrAnalyst) {
     return (
