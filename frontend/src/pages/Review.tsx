@@ -64,7 +64,7 @@ export const Review: React.FC = () => {
               onChange={(e) => handleFilterChange('source', e.target.value)}
               className="text-xs font-bold bg-white border border-slate-200 rounded-xl py-2.5 pl-3 pr-8 focus:outline-none focus:border-emerald-500 appearance-none cursor-pointer"
             >
-              <option value="">All Sources</option>
+              <option value="">Source</option>
               <option value="SAP">SAP</option>
               <option value="Utility">Utility</option>
               <option value="Travel">Travel</option>
@@ -79,7 +79,7 @@ export const Review: React.FC = () => {
               onChange={(e) => handleFilterChange('scope', e.target.value)}
               className="text-xs font-bold bg-white border border-slate-200 rounded-xl py-2.5 pl-3 pr-8 focus:outline-none focus:border-emerald-500 appearance-none cursor-pointer"
             >
-              <option value="">All Scopes</option>
+              <option value="">Scopes</option>
               <option value="Scope 1">Scope 1</option>
               <option value="Scope 2">Scope 2</option>
               <option value="Scope 3">Scope 3</option>
@@ -94,7 +94,7 @@ export const Review: React.FC = () => {
               onChange={(e) => handleFilterChange('status', e.target.value)}
               className="text-xs font-bold bg-white border border-slate-200 rounded-xl py-2.5 pl-3 pr-8 focus:outline-none focus:border-emerald-500 appearance-none cursor-pointer"
             >
-              <option value="">All Statuses</option>
+              <option value="">Status</option>
               <option value="Approved">Approved</option>
               <option value="Suspicious">Suspicious</option>
               <option value="Failed">Failed</option>

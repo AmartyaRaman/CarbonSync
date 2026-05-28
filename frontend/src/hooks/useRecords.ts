@@ -12,6 +12,7 @@ export const useRecords = (initialFilters?: { scope?: string; source?: string; s
   const fetchRecords = useCallback(async () => {
     setLoading(true);
     setError(null);
+    
     try {
       // Fetch all records with current filters
       const data = await api.getRecords(filters);
